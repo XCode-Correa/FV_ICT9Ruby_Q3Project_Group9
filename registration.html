@@ -68,11 +68,13 @@
             <a class="nav-link text-light text-decoration-underline mx-4" href="#">Book Now</a>
 
             <form class="d-flex">
-                <button class="btn btn-dark" type="button">Search</button>
+                <a href="registration.html"><button class="btn btn-dark" type="button">Create an Account</button></a>
             </form>
         </div>
     </div>
 </nav>
+
+<br>
 
 <div style="width: 600px; background-color: rgba(255, 255, 255, 0.667);" class="container p-3 text-dark rounded">
     <div class="row p-1">
@@ -157,7 +159,7 @@
             <br>
 
             <center>
-                <button style="width: 200px;" type="submit" id="submit" name="submit" class="btn btn-dark" onclick="submit()">Create my account</button>
+                <a href="confirmation.html"><button style="width: 200px;" type="submit" id="submit" name="submit" class="btn btn-dark" onclick="submit()">Create my account</button></a>
             </center>
 
             <br>
@@ -173,15 +175,12 @@
 <br>
 
 <div class="container-fluid bg-dark p-1 opacity-75 text-light text-center fs-8 fw-bold">
-    © 2026 OB Montessori Website | Edrian Correa 9-Ruby
+    © 2026 OB Montessori Website | 9-Ruby Group 9
 </div>
 
 <script>
     document.getElementById("instruct").innerHTML = "<i>Please fill out the forms below accurately and honestly. Check the information inputed, then click Submit to finish the process, or Cancel to reset the form.</i>";
 
-    function submit(){
-        alert("Account successfully created")
-    }
     function upload(){
         alert("Profile picture has been uploaded")
     }
