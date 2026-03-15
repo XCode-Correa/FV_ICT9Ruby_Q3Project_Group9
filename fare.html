@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q3 Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body{
+            background-image: url('https://wallpapers.com/images/hd/night-street-qf632j00dgl2xvkv.jpg');
+            background-size: cover;
+            background-repeat: repeat;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: rgb(34, 34, 34);
+        }
+        img{
+            height: 60px;
+            width: 60px;
+        }
+        .custom-gradient{
+            background-image: linear-gradient(to right, #000000, #00323b);
+        }
+        .fs-7{
+            font-size: 25px;
+        }
+        .fs-8{
+            font-size: 12px;
+        }
+        .fs-9{
+            font-size: 15px;
+        }
+        .pt-6 {
+            padding-top: 65px;
+        }
+        #instruct{
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark shadow custom-gradient fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"><img src="Fair Fares logo.png" alt="Logo" class=""></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mynavbar">
+
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="fare.html">Fare Matrix</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="about.html">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Help</a>
+                </li>
+            </ul>
+
+            <a class="nav-link text-light text-decoration-underline mx-4" href="#">Book Now</a>
+
+            <form class="d-flex">
+                <a href="registration.html"><button class="btn btn-dark" type="button">Create an Account</button></a>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<br><br><br><br>
+
+<div class="container bg-light bg-opacity-75 rounded p-3">
+    <h1 class="text-center bg-dark rounded fw-bold" style="color: white; font-family: 'Courier New'">Fair Fare's Fare Matrix</h1>
+
+    <br>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <img src="https://www.deiville.com/wp-content/uploads/2023/03/map-of-lrt-line-1-2-and-mrt-3-stations.jpg" style="width: 350px; height: 300px;" class="rounded">
+        </div>
+
+        <div class="col-lg-4 text-center">
+            <h2 class="fw-bold" style="font-family: 'Courier New'">PICK-UP LOCATION</h2>
+            <select class="form-control" id="pickup">
+                <option value="0">Choose place for pickup...</option>
+                <option value="0.1">North Ave.</option>
+                <option value="1.2">Quezon Ave.</option>
+                <option value="2.2">Kamuning</option>
+                <option value="3.9">Areneta Center-Cubao</option>
+                <option value="5.9">Santolan-Annapolis</option>
+                <option value="8.3">Ortigas</option>
+                <option value="10">Shaw Boulevard</option>
+                <option value="12">Boni</option>
+                <option value="10.9">Guadalupe</option>
+                <option value="15">Buendia</option>
+                <option value="13.7">Ayala</option>
+                <option value="14.9">Magallanes</option>
+                <option value="16.9">Taft Avenue</option>
+            </select>
+
+            <br>
+    
+            <h2 class="fw-bold" style="font-family: 'Courier New'">DROP-OFF LOCATION</h2>
+            
+            <select class="form-control" id="dropoff">
+                <option value="0">Choose place for drop-off...</option>
+                <option value="0.1">North Ave.</option>
+                <option value="1.2">Quezon Ave.</option>
+                <option value="2.2">Kamuning</option>
+                <option value="3.9">Areneta Center-Cubao</option>
+                <option value="5.9">Santolan-Annapolis</option>
+                <option value="8.3">Ortigas</option>
+                <option value="10">Shaw Boulevard</option>
+                <option value="12">Boni</option>
+                <option value="10.9">Guadalupe</option>
+                <option value="15">Buendia</option>
+                <option value="13.7">Ayala</option>
+                <option value="14.9">Magallanes</option>
+                <option value="16.9">Taft Avenue</option>
+            </select>
+            
+            <br>
+
+            <button type="button" class="btn btn-dark" onclick="document.getElementById('disc').checked=false; calculateFare()">Regular Fare</button>
+            <button type="submit" class="btn btn-light" onclick="document.getElementById('disc').checked=true; calculateDiscountedFare()">Discount Fare</button>
+        </div>
+    
+        <div class="col-lg-4 text-center">
+            <div class="bg-dark rounded" style="height: 300px; color: white;">
+                <br>
+                <h1 class="text-center fw-bold" style="font-family: 'Courier New';">Fare:</h1>
+                <br>
+                <h1 id="DisplayAns" class="text-center">₱0.00</h1>
+            </div>
+
+            <input type="checkbox" id="disc" hidden>
+        </div>
+    </div>
+</div>
+
+<footer class="fixed-bottom container-fluid bg-dark p-1 opacity-75 text-light text-center fs-8 fw-bold">
+    © 2026 OB Montessori Website | 9-Ruby Group 9
+</footer>
+
+<script>
+    function calculateFare(){
+        let pickup, dropoff, basefare, baseKM, perKMrate, distance, extraKM, discount;
+        pickup = parseFloat(document.getElementById("pickup").value);
+        dropoff = parseFloat(document.getElementById("dropoff").value);
+        basefare = 50;
+        perKMrate = 15;
+        baseKM = 2;
+        discount = document.getElementById("disc").checked;
+
+        distance = Math.max(Math.abs(dropoff-pickup), 0);
+        extraKM = Math.max(distance - baseKM,0); 
+
+        let fare = basefare + extraKM * perKMrate;
+
+        document.getElementById("DisplayAns").innerHTML = "₱" + fare.toFixed(2)
+    }
+
+    function calculateDiscountedFare(){
+        let pickup, dropoff, basefare, baseKM, perKMrate, distance, extraKM, discount;
+        pickup = parseFloat(document.getElementById("pickup").value);
+        dropoff = parseFloat(document.getElementById("dropoff").value);
+        basefare = 50;
+        perKMrate = 15;
+        baseKM = 2;
+        discount = document.getElementById("disc").checked;
+
+        distance = Math.max(Math.abs(dropoff-pickup), 0);
+        extraKM = Math.max(distance - baseKM,0); 
+
+        let fare = basefare + extraKM * perKMrate;
+
+        fare = fare * (1 - 0.2 * discount);
+
+        document.getElementById("DisplayAns").innerHTML = "₱" + fare.toFixed(2)
+    }
+</script>
+</body>
+</html>
